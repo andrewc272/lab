@@ -5,8 +5,10 @@ class Account:
         This function 'sets up' the account setting its name(an argument) and its amount(0)
         :param name: This is what the account name will be set to
         """
+        if type(name) != str:
+            raise TypeError
         self.__account_name = name
-        self.__account_balance = 0
+        self.__account_balance = 0.0
 
     def deposit(self, amount: float) -> bool:
         """
@@ -14,6 +16,8 @@ class Account:
         :param amount: This is the amount the balance will increase by (amount > 0)
         :return: result of the deposit attempt returns false if amount is <= 0 (bool)
         """
+        if type(amount) == str or type(amount) == bool:
+            raise TypeError
         if amount > 0:
             self.__account_balance += amount
             return True
@@ -27,8 +31,10 @@ class Account:
         :param amount: This is the amount the balance will increase by (amount > 0)
         :return: Determines weather the withdrawal was successful (bool)
         """
-        if self.__account_balance - amount < 0 or amount <= 0:
-            return True
+        if type(amount) == str or type(amount) == bool:
+            raise TypeError
+        if (self.__account_balance - amount) < 0 or amount <= 0:
+            return False
         else:
             self.__account_balance += -1*amount
             return True
